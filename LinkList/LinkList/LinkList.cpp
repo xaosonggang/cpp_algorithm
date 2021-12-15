@@ -22,7 +22,7 @@ int main()
 	cout << "\n\n After insert" << endl;
 	PrintLinkList(lList);
 
-	/*
+	///*
 	cout << "\n\n Delete All LinkList" << endl;
 	//lList.Delete(randVec[1]);
 	//lList.Delete(randVec[0]);
@@ -31,7 +31,7 @@ int main()
 	lList.DeleteIndex(0);
 	lList.DeleteIndex(static_cast<int>(randVec.size()) -3);
 	PrintLinkList(lList);
-	*/
+	//*/
 
 	cout << "\n\n Search" << endl;
 	cout << "s 2:" << lList.Search(randVec[2]) << endl;
