@@ -23,3 +23,18 @@ vector<int> GetRandomVecInt(int nCount, int nMaxNum /*= 9999*/)
 	}
 	return vec;
 }
+
+int GetRandomInt(int nMin, int nMax)
+{
+	static int tick = static_cast<int>(std::clock() * 1000 / CLOCKS_PER_SEC);
+	static std::default_random_engine engine(tick);
+
+	if (nMin > nMax)
+	{
+		int temp = nMax;
+		nMax = nMin;
+		nMin = temp;
+	}
+	std::uniform_int_distribution<int> uniform(nMin, nMax);
+	return uniform(engine);
+}

@@ -40,5 +40,5 @@ template<class T> void PrintVec(const vector<T>& vec)
 
 //取得随机数
 vector<int> GetRandomVecInt(int nCount, int nMaxNum = 9999);
-
+int GetRandomInt(int nMin, int nMax);
 

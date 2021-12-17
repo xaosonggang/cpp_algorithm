@@ -104,24 +104,72 @@ void QuickSort_Desc(vector<int>& targVec, int nLeftIndex, int nRightIndex)
     return;
 }
 
+template<typename T> void QuickSort_Random(vector<T>& targVec, int left, int right)
+{
+    if (left >= right) return;
+    if (left < 0 || left >= targVec.size()) return;
+    if (right < 0 || right >= targVec.size()) return;
+
+    int pivotIndex = GetRandomInt(left, right);
+    T pivotVal = targVec[pivotIndex];
+    int leftIndex = left;
+    int rightIndex = right;
+    if (leftIndex == pivotIndex) ++leftIndex;
+    if (rightIndex == pivotIndex) --rightIndex;
+    while (true)
+    {
+        while (leftIndex <= right && targVec[leftIndex] <= pivotVal)
+        {
+            if (++leftIndex == pivotIndex)
+                ++leftIndex;
+        }
+        while (rightIndex >= left && targVec[rightIndex] > pivotVal)
+        {
+            if (--rightIndex == pivotIndex)
+                --rightIndex;
+        }
+        if (leftIndex >= rightIndex) break;
+		SwapVecVal(targVec, leftIndex, rightIndex);
+    }
+    if (leftIndex < pivotIndex)
+    {
+        SwapVecVal(targVec, leftIndex, pivotIndex);
+        QuickSort_Random(targVec, left, leftIndex -1);
+        QuickSort_Random(targVec, leftIndex + 1, right);
+    }
+    else if (rightIndex > pivotIndex)
+    {
+        SwapVecVal(targVec, rightIndex, pivotIndex);
+        QuickSort_Random(targVec, left, rightIndex - 1);
+        QuickSort_Random(targVec, rightIndex + 1, right);
+    }
+    else
+    {
+		QuickSort_Random(targVec, left, pivotIndex - 1);
+		QuickSort_Random(targVec, pivotIndex + 1, right);
+    }
+    return;
+}
+
 int main()
 {
-    vector<int> randVec = GetRandomVecInt(0, 999);
+    vector<int> randVec = GetRandomVecInt(100, 99999); 
     cout << "random vector!" << endl;
     PrintVec(randVec);
 
     //QuickSort_Recursion(randVec, 0, static_cast<int>(randVec.size()) - 1);
     //QuickSort_Deque(randVec);
-    QuickSort_Desc(randVec, 0, static_cast<int>(randVec.size()) - 1);
+    //QuickSort_Desc(randVec, 0, static_cast<int>(randVec.size()) - 1);
+    QuickSort_Random(randVec, 0, static_cast<int>(randVec.size()) - 1);
 
     cout << "\n\nquick sort vector!" << endl;
     PrintVec(randVec);
 
     for (int i = 0; i < static_cast<int>(randVec.size()) - 1; ++i)
     {
-        if (randVec[i] < randVec[i + 1])
+        if (randVec[i] > randVec[i + 1])
         {
-            cout << "error sort!!!" << endl;
+            cout << "error sort!!!" << randVec[i] << "\t"<< randVec[i+1] << endl;
         }
     }
 
