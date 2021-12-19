@@ -1,31 +1,26 @@
-﻿// Queue.cpp : 此文件包含 "main" 函数。程序执行将在此处开始并结束。
+﻿// HashMap.cpp : 此文件包含 "main" 函数。程序执行将在此处开始并结束。
 //
 
 #include "../../Utility/utility.h"
-#include "QueueData.h"
-
+#include "HashMapData.h"
 
 int main()
 {
-    QueueData<int> qData;
-    PrintQueue(qData);
+    HashListMap<int, string> hMap(2);
+	PrintHashListMap(hMap);
 
 	constexpr int randNum = 20;
 	vector<int> randVec(GetRandomVecInt(randNum, 999));
 	PrintVec(randVec);
 
-	cout << "enqueue QueueData" << endl;
+	string str = "key";
+	int index = 0;
 	for (const auto& elem : randVec)
 	{
-		qData.EnQueue(elem);
+		hMap.Add(elem, str);
 	}
-	PrintQueue(qData);
 
-	while (!qData.IsEmpty())
-	{
-		cout << "Peek:" << qData.Peek() << "\t";
-		cout << "Dequeue:" << qData.DeQueue() << endl;
-	}
+    PrintHashListMap(hMap);
 
     system("pause");
 }

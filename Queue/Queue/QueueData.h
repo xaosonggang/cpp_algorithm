@@ -44,10 +44,10 @@ public:
 public:
 	void EnQueue(const T& val);
 	T DeQueue();
-	T Peek();
+	T Peek() const;
 
-	bool IsFull();
-	bool IsEmpty();
+	bool IsFull() const;
+	bool IsEmpty() const;
 
 public:
 	QueueNode<T>* GetHead()const { return m_pHead; }
@@ -64,6 +64,7 @@ private:
 template<typename T> void QueueData<T>::EnQueue(const T& val)
 {
 	QueueNode<T>* pNode = new QueueNode<T>(val);
+	if (pNode == nullptr) return;
 	if (m_pHead == nullptr)
 	{
 		m_pHead = pNode;
@@ -99,7 +100,7 @@ template<typename T> T QueueData<T>::DeQueue()
 	return val;
 }
 
-template<typename T> T QueueData<T>::Peek()
+template<typename T> T QueueData<T>::Peek()  const
 {
 	static T defaultVal;
 	if (m_pHead == nullptr)
@@ -109,12 +110,12 @@ template<typename T> T QueueData<T>::Peek()
 	return m_pHead->GetVal();
 }
 
-template<typename T> bool QueueData<T>::IsFull()
+template<typename T> bool QueueData<T>::IsFull() const
 {
 	return false;
 }
 
-template<typename T> bool QueueData<T>::IsEmpty()
+template<typename T> bool QueueData<T>::IsEmpty() const
 {
 	return m_pHead == nullptr;
 }
